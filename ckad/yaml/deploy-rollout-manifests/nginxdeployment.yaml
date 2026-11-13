@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-deployment
+  namespace: website
+  annotations:
+    kubernetes.io/change-cause: "Adding a label for revision 3"
+  labels:
+    app: website
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ckad-web
+  template:
+    metadata:
+      labels:
+        app: ckad-web
+        rollout: version3
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+          name: website-port
+          protocol: TCP

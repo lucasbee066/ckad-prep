@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: envvaluefrom-configmap-from-env-file
+spec:
+  restartPolicy: Never
+  containers:
+  - name: envars-test-container
+    image: nginx
+    env:
+    - name: BAR
+      valueFrom:
+        configMapKeyRef:
+          name: from-env-file
+          key: BAR
+    - name: CHAINSAW
+      valueFrom:
+        configMapKeyRef:
+          name: from-env-file
+          key: CHAINSAW
+    command: ["/bin/sh", "-c", "printenv"]
+    #command: ["/bin/sh", "-c"]
+    #args:
+    #  - |
+    #    echo "Bar-length: $BAR"
+    #    echo "Chainsaw: $CHAINSAW"

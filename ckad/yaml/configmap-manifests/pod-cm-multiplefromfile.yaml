@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2026-08-09T01:10:47Z"
+  generation: 1
+  labels:
+    run: webapp-color-cm-multiplefromfile
+  name: webapp-color-cm-multiplefromfile
+  namespace: pod-configmaps
+spec:
+  containers:
+  - name: webapp-color-cm-multiplefromfile
+    image: nginx
+    imagePullPolicy: Always
+    volumeMounts:
+      - name: ngx-cm
+        readOnly: true
+        mountPath: /etc/app
+    command: ["/bin/sh", "-c"]
+    args:
+      - |
+        chainsaw=$(cat /etc/app/chainsaw)
+        echo "chainsaw: $chainsaw"
+        bar=$(cat /etc/app/bar)
+        echo "bar-length: $bar"
+        exec nginx -g 'daemon off;'
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+  volumes:
+    - name: ngx-cm
+      configMap:
+        name: nginx-config-multiplefromfile 

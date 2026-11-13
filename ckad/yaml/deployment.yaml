@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: deployment
+  labels:
+    tier: fron
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontenddeployment
+  template:
+    metadata:
+      labels:
+        tier: frontenddeployment
+    spec:
+      containers:
+      - name: php-redis
+        image: nginx
+

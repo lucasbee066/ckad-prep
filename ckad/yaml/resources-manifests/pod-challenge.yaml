@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bb-pod
+spec:
+  containers:
+  - name: bb
+    image: busybox 
+    resources:
+      requests:
+        cpu: 330m
+      limits:
+        cpu: 600m
+  restartPolicy: Never

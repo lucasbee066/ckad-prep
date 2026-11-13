@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-practice 
+  namespace: final-prep
+spec:
+  containers:
+  - name: final
+    image: busybox:1.36 
+    command: ["/bin/sh", "-c", "sleep 3600"]
+    env:
+      - name: APP_NAME
+        value: ckad-practice
+      - name: APPLICATION_MODE
+        valueFrom:
+          configMapKeyRef:
+            key: APP_MODE
+            name: app-config
+      - name: DB_PASSWORD
+        valueFrom:
+           secretKeyRef:
+             key: password
+             name: database-secret
+    envFrom:
+       - configMapRef:
+           name: database-config
+       - secretRef:
+           name: api-secret
+         prefix: CKAD_

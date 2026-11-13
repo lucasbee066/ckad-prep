@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-challenge 
+spec:
+  hard:
+    requests.cpu: "1"
+    limits.cpu: "2"
+    pods: 4

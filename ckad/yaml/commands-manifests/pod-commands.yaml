@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ckad-pod-commands
+  labels:
+    app: pod-commands
+spec:
+  containers:
+  - name: podcommands
+    image: busybox
+    env:
+      - name: Name
+        value: Lucas
+    #command: ["sleep"]
+    #args: ["30"]
+    #command:
+    #  - sleep
+    #args:
+    #  - "30"
+    #command: ["echo"]
+    #args: ["hello", "lucas", "CKAD"]
+    #command:
+    #- echo
+    #args:
+    #- Hello
+    #- "lucas"
+    #- CKAD
+    #command: ["/bin/sh", "-c"]
+    #args:
+    #- echo hello && sleep 10 && echo goodbye
+    #command: ["/bin/sh", "-c"]
+    #args:
+    #  - echo "starting";
+    #    sleep 10;
+    #    echo "Finished"
+    #command: ["/bin/sh", "-c"]
+    #args:
+    #- |
+    #  echo hello
+    #  sleep 5
+    #  echo "I slept for 5 seconds"
+    #  sleep 5
+    #  echo "good bye"
+    command: ["/bin/sh", "-c"]
+    args:
+      - |
+        echo "Name: $(Name)"

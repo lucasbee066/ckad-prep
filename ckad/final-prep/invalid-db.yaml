@@ -1,0 +1,11 @@
+apiVersion: training.ckad.io/v1alpha1
+kind: Database
+metadata:
+  name: invalid-db
+  namespace: final-prep
+spec:
+  databaseName: inventory
+  engine: mysql
+  replicas: 10
+  port: 3306
+  storageSize: 5Gi

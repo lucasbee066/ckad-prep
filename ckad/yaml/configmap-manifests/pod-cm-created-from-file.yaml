@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-from-file
+spec:
+  containers:
+    - name: from-file
+      volumeMounts:
+        - name: fromfile
+          mountPath: /etc/app
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          . /etc/app/app.env
+          echo "APP_COLOR: $APP_COLOR"
+          echo "LOG_LEVEL: $LOG_LEVEL"
+          echo "Mode: $APP_MODE"
+          echo "Chainsaw: $CHAINSAW"
+          echo "Bar: $BAR"
+          exec nginx -g 'daemon off;'
+      image: nginx 
+  volumes:
+    - name: fromfile
+      configMap:
+        name: from-file
+      

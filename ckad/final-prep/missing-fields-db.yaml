@@ -1,0 +1,9 @@
+apiVersion: training.ckad.io/v1alpha1
+kind: Database
+metadata:
+  name: missing-fields-db
+  namespace: final-prep
+spec:
+  databaseName: reports
+  replicas: 2
+  port: 5432

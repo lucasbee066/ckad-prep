@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: ckad-resource-limits 
+  namespace: final-prep
+spec:
+  limits:
+  - default: # this section defines default limits
+      cpu: 500m
+      memory: 512Mi
+    defaultRequest: # this section defines default requests
+      cpu: 500m
+      memory: 128Mi
+    min:
+      cpu: 50m
+      memory: 64Mi
+    max:
+      cpu: 1000m
+      memory: 1Gi
+    type: Container

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontya
+  namespace: front
+  labels:
+    tier: front
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: front
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        tier: front
+    
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx

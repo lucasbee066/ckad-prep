@@ -1,0 +1,13 @@
+apiVersion: training.ckad.io/v1alpha1
+kind: Database
+metadata:
+  name: production-db
+  namespace: final-prep
+spec:
+  databaseName: customers
+  engine: postgresql
+  environment: production
+  replicas: 3
+  port: 5432
+  storageSize: 10Gi
+  backupEnabled: true

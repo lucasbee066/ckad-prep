@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limitrange-challenge 
+spec:
+  limits:
+  - default: # this section defines default limits
+      cpu: 400m
+    defaultRequest: # this section defines default requests
+      cpu: 200m
+    max: # max and min define the limit range
+      cpu: "800m"
+    min:
+      cpu: 100m
+    type: Container

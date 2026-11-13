@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-pvc 
+  namespace: ckad-pvc
+spec:
+  containers:
+  - name: busybox
+    image: busybox 
+    volumeMounts:
+      - name: nfs-storage 
+        mountPath: /data
+    command: ["/bin/sh", "-c"]
+    args:
+      - sleep 560
+    restartPolicy: Never
+  volumes:
+    - name: nfs-storage
+      persistentVolumeClaim:
+        claimName: ckad-pvc01

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-green 
+  annotations:
+    kubernetes.io/change-cause: "Adding a label for revision 1"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+      version: green
+  template:
+    metadata:
+      labels:
+        app: web 
+        version: green
+    spec:
+      initContainers:
+      - name: green-init
+        image: busybox
+        volumeMounts:
+          - name: html
+            mountPath: /html
+        command: ["/bin/sh", "-c", "echo '<h1>GREEN DEPLOYMENT</h1>' > /html/index.html"]
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+          name: website-port
+          protocol: TCP
+        volumeMounts:
+          - name: html
+            mountPath: /usr/share/nginx/html
+      volumes:
+        - name: html
+          emptyDir: {}
+
